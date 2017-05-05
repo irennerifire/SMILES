@@ -1,92 +1,201 @@
 # -*- coding: cp1251 -*-
+from pyfaidx import Fasta
 import numpy as np
 import csv
 import simpleSM
 import chirSM
 
 
-qest = input("Do you whant to enter sequence or you have  FASTA-file? Enter 1, if you want to enter seuence yourself. Enter 2, if you have FASTA-file.")
+qest = input("Do you whant to enter sequence or you have  FASTA-file? Enter 1, if you want to enter sequence by yourself. Enter 2, if you have FASTA-file. Enter 3 if you have fasta parcer from PDB (many sequences in one file.)")
 
 
 if qest == "1":
-    qest2 = input("Do you have a file with strings or you want enter the ONE string by yourself? Enter 1/2. ")
 
-    if qest2 == "1":
-        name_of_files = input ("Enter the name of file with strings: ")
-        with open(name_of_files) as file1:
-            array = [row.strip() for row in file1]
-        l = 0
-        for i in open(name_of_files, "r"):
-            l += 1
-        seq1 = []
-        for w in range(l):
-            seq1.append([])
-            seq1[w] = array[w]
-        print("Sequence:  ", seq1)
-        SM1 = []
-        for e in range(l):
-            SM1.append([])
-            SM1[e]=simpleSM.SM(seq1[e])
-        print('SMILEs for SM sequenses:  \n')
-        print('\n\n'.join(SM1))
-        f = open("SM1_sequences.txt", "w")
-        for item in SM1:
-            f.write('%s\n'%item)
-        f.close()
-        with open("SM1_sequences.csv", "w", newline='') as file:
-            for it in SM1:
-                csv.writer(file).writerow([it])
-        
-    if qest2 == "2":
-        seq = input("Enter sequence  ")
-        print("Sequence: ", seq)
-        SM = simpleSM.SM(seq)
-        print("SM: ", SM)
+    qest1 = input ("Do you want simple smiles string or string with chirality? Enter 1 or 2.")
 
+    if qest1 == "1":
+        qest2 = input("Do you have a file with strings or you want enter the ONE string by yourself? Enter 1/2. ")
+
+        if qest2 == "1":
+            name_of_files = input ("Enter the name of file with strings: ")
+            with open(name_of_files) as file1:
+                array = [row.strip() for row in file1]
+            l = 0
+            for i in open(name_of_files, "r"):
+                l += 1
+            seq1 = []
+            for w in range(l):
+                seq1.append([])
+                seq1[w] = array[w]
+            print("Sequence:  ", seq1)
+            SM1 = []
+            for e in range(l):
+                SM1.append([])
+                SM1[e]=simpleSM.SM(seq1[e])
+            print('SMILEs for SM sequenses:  \n')
+            print('\n\n'.join(SM1))
+            f = open("SM1_sequences.txt", "w")
+            for item in SM1:
+                f.write('%s\n'%item)
+            f.close()
+            with open("SM1_sequences.csv", "w", newline='') as file:
+                for it in SM1:
+                    csv.writer(file).writerow([it])
+            
+        if qest2 == "2":
+            seq = input("Enter sequence  ")
+            print("Sequence: ", seq)
+            SM = simpleSM.SM(seq)
+            print("SM: ", SM)
+
+    if qest1 == "2":
+        qest2 = input("Do you have a file with strings or you want enter the ONE string by yourself? Enter 1/2. ")
+
+        if qest2 == "1":
+            name_of_files = input ("Enter the name of file with strings: ")
+            with open(name_of_files) as file1:
+                array = [row.strip() for row in file1]
+            l = 0
+            for i in open(name_of_files, "r"):
+                l += 1
+            seq1 = []
+            for w in range(l):
+                seq1.append([])
+                seq1[w] = array[w]
+            print("Sequence:  ", seq1)
+            SM1 = []
+            for e in range(l):
+                SM1.append([])
+                SM1[e]=chirSM.SM2(seq1[e])
+            print('SMILEs for SM sequenses:  \n')
+            print('\n\n'.join(SM1))
+            f = open("SM1_sequences.txt", "w")
+            for item in SM1:
+                f.write('%s\n'%item)
+            f.close()
+            with open("SM1_sequences.csv", "w", newline='') as file:
+                for it in SM1:
+                    csv.writer(file).writerow([it])
+            
+        if qest2 == "2":
+            seq = input("Enter sequence  ")
+            print("Sequence: ", seq)
+            SM1 = chirSM.SM2(seq)
+            print("SM: ", SM1)
+ 
         
 if qest == "2":
-    qest22 = input("Do you have a file with filenames or you want enter the name of file with ONE protein? Enter 1/2. ")
+    qest11 = input ("Do you want string with chirality or simple smiles string? Enter 1 or 2.")
 
-    if qest22 == "1":
-        name_of_files = input ("Enter the name of file with filenames: ")
-        with open(name_of_files) as file1:
-            array = [row.strip() for row in file1]
-        seq2 = []
-        for s in range(len(array)):
-            seq2.append([])
-            with open(array[s]) as file:
-                array2 = [row.strip() for row in file]
-            seq2[s] = array2[1]
-        print("Sequences:   ", seq2)
-        SM2 = []
-        for q in range(len(seq2)):
-            SM2.append([])
-            SM2[q]=chirSM.SM2(seq2[q])
-        print('SMILEs for SM2 sequenses:  \n')
-        print('\n\n'.join(SM2))
-        f = open("SM2_sequences.txt", "w")
-        for item in SM2:
-            f.write('%s\n'%item)
-        f.close()
-        with open("SM2_sequences.csv", "w", newline='') as file:
-            for it in SM2:
-                csv.writer(file).writerow([it])
+    if qest11 == "1":
+        qest22 = input("Do you have a file with filenames or you want enter the name of file with ONE protein? Enter 1/2. ")
 
-    if qest22 == "2":
-        namef = input("Enter name of the file you want to analyze: ")
-        file_seq = open(namef, "r")
-        file_r = file_seq.read()
-        print("File contains the following: ")
-        print(file_r)
-        file_seq.close()
-        with open(namef) as file:
-            array = [row.strip() for row in file]
-        seq = array[1]
-        print("Sequence: ", seq)
-        SM2 = chirSM.SM2(seq)
-        print("SM2: ", SM2)
+        if qest22 == "1":
+            name_of_files = input ("Enter the name of file with filenames: ")
+            with open(name_of_files) as file1:
+                array = [row.strip() for row in file1]
+            seq2 = []
+            for s in range(len(array)):
+                seq2.append([])
+                with open(array[s]) as file:
+                    array2 = [row.strip() for row in file]
+                seq2[s] = array2[1]
+            print("Sequences:   ", seq2)
+            SM2 = []
+            for q in range(len(seq2)):
+                SM2.append([])
+                SM2[q]=chirSM.SM2(seq2[q])
+            print('SMILEs for SM2 sequenses:  \n')
+            print('\n\n'.join(SM2))
+            f = open("SM2_sequences.txt", "w")
+            for item in SM2:
+                f.write('%s\n'%item)
+            f.close()
+            with open("SM2_sequences.csv", "w", newline='') as file:
+                for it in SM2:
+                    csv.writer(file).writerow([it])
+
+        if qest22 == "2":
+            namef = input("Enter name of the file you want to analyze: ")
+            file_seq = open(namef, "r")
+            file_r = file_seq.read()
+            print("File contains the following: ")
+            print(file_r)
+            file_seq.close()
+            with open(namef) as file:
+                array = [row.strip() for row in file]
+            seq = array[1]
+            print("Sequence: ", seq)
+            SM2 = chirSM.SM2(seq)
+            print("SM2: ", SM2)
+
+    if qest11 == "2":
+        qest22 = input("Do you have a file with filenames or you want enter the name of file with ONE protein? Enter 1/2. ")
+
+        if qest22 == "1":
+            name_of_files = input ("Enter the name of file with filenames: ")
+            with open(name_of_files) as file1:
+                array = [row.strip() for row in file1]
+            seq2 = []
+            for s in range(len(array)):
+                seq2.append([])
+                with open(array[s]) as file:
+                    array2 = [row.strip() for row in file]
+                seq2[s] = array2[1]
+            print("Sequences:   ", seq2)
+            SM2 = []
+            for q in range(len(seq2)):
+                SM2.append([])
+                SM2[q]=simpleSM.SM(seq2[q])
+            print('SMILEs for SM2 sequenses:  \n')
+            print('\n\n'.join(SM2))
+            f = open("SM2_sequences.txt", "w")
+            for item in SM2:
+                f.write('%s\n'%item)
+            f.close()
+            with open("SM2_sequences.csv", "w", newline='') as file:
+                for it in SM2:
+                    csv.writer(file).writerow([it])
+
+        if qest22 == "2":
+            namef = input("Enter name of the file you want to analyze: ")
+            file_seq = open(namef, "r")
+            file_r = file_seq.read()
+            print("File contains the following: ")
+            print(file_r)
+            file_seq.close()
+            with open(namef) as file:
+                array = [row.strip() for row in file]
+            seq = array[1]
+            print("Sequence: ", seq)
+            SM2 = simpleSM.SM(seq)
+            print("SM2: ", SM2)
+   
+
+     
+if qest == "3":
+    namef = input ("Enter the name of file: ")
+    proteins = Fasta(namef)
+    SM2 = []
+
+    for q in proteins.keys():
+        seq = str(proteins[q])
+##        SM2.append([])
+##        SM2[r]=chirSM.SM2(seq)
+
+
+##    f = open("SM2_sequencesPDB.txt", "w")
+##    for item in SM2:
+##        f.write('%s\n'%item)
+##        f.close()
+    
+##    for prot in proteins.keys():
+##        print(prot)
+##        seq = str(proteins[prot])
+##        print(seq)
+##        SM2= chirSM.SM2(seq)
+##        print("SM2: ", SM2, "prot: ", prot)
         
-
 Gly1 = 'OC(=O)C(N)'                             #G
 Ala1 = 'OC(=O)C(N)C'                          #A
 Ser1 = 'OC(=O)C(N)CO'                           #S

@@ -173,7 +173,7 @@ def SM2(seq):
                 if seq[0]=='F':
                     SM2 = SM2 + F2[1:len(F2)]
                     
-            SM2 = SM2 + ')CCCC1'
+           # SM2 = SM2 + ')CCCC1'
             
     for j in seq[2:len(seq)]:
         if j=='P':
