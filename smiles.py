@@ -1,12 +1,11 @@
 # -*- coding: cp1251 -*-
-from pyfaidx import Fasta
 import numpy as np
 import csv
 import simpleSM
 import chirSM
 
 
-qest = input("Do you whant to enter sequence or you have  FASTA-file? Enter 1, if you want to enter sequence by yourself. Enter 2, if you have FASTA-file. Enter 3 if you have fasta parcer from PDB (many sequences in one file.)")
+qest = input("Do you whant to enter sequence or you have  FASTA-file? Enter 1, if you want to enter seuence yourself. Enter 2, if you have FASTA-file.")
 
 
 if qest == "1":
@@ -87,29 +86,7 @@ if qest == "2":
         SM2 = chirSM.SM2(seq)
         print("SM2: ", SM2)
         
-if qest == "3":
-    namef = input ("Enter the name of file: ")
-    proteins = Fasta(namef)
-    SM2 = []
 
-    for q in proteins.keys():
-        seq = str(proteins[q])
-##        SM2.append([])
-##        SM2[r]=chirSM.SM2(seq)
-
-
-##    f = open("SM2_sequencesPDB.txt", "w")
-##    for item in SM2:
-##        f.write('%s\n'%item)
-##        f.close()
-    
-##    for prot in proteins.keys():
-##        print(prot)
-##        seq = str(proteins[prot])
-##        print(seq)
-##        SM2= chirSM.SM2(seq)
-##        print("SM2: ", SM2, "prot: ", prot)
-        
 Gly1 = 'OC(=O)C(N)'                             #G
 Ala1 = 'OC(=O)C(N)C'                          #A
 Ser1 = 'OC(=O)C(N)CO'                           #S
