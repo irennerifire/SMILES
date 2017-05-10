@@ -1,0 +1,3 @@
+1qs3.fasta.txt
+3fr1.fasta.txt
+4qxx.fasta.txt
