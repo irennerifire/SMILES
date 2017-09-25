@@ -15,12 +15,15 @@ def SM(seq):
     H1 = 'OC(=O)C(N)CC1[N]=CNC=1'               #H
     K1 = 'OC(=O)C(N)CCCC(N)'                    #K
     I1 = 'OC(=O)C(N)C(C)CC'                     #I
-    Y1 = 'OC(=O)C(N)CC1=CC=C(O)C=C1'            #Y
+    #Y1 = 'OC(=O)C(N)CC1=CC=C(O)C=C1'            #Y
+    Y1 = 'OC(=O)C(N)Cc1ccc(O)cc1'
     N1 = 'OC(=O)C(N)CC(=O)(N)'                  #N
     M1 = 'OC(=O)C(N)CCSC'                       #? Met
     P1 = 'OC(=O)C1CCCN1'                        #P
-    W1 = 'OC(=O)C(N)C(C1C2C=CC=CC=2N(H)C=1)'    #W
-    F1 = 'OC(=O)C(N)CC1=CC=CC=C1'               #F
+    #W1 = 'OC(=O)C(N)C(C1C2C=CC=CC=2N(H)C=1)'    #W
+    W1 = 'OC(=O)C(N)C(c1c2ccccc2N(H)c1)'
+    #F1 = 'OC(=O)C(N)CC1=CC=CC=C1'               #F
+    F1 = 'OC(=O)C(N)Cc1ccccc1'
     Q1 = 'OC(=O)C(N)CCC(=O)(N)'                 #Q
 
     for l in list1:
@@ -65,7 +68,7 @@ def SM(seq):
                 SM = F1[11:len(F1)]+'C'
             if l=='Q':
                 SM = Q1[11:len(Q1)]+'C'
-            SM = SM + '(N'     
+            SM = SM + '(N'
             if seq[0]=='G':
                 SM = SM + G1[1:len(G1)]
             if seq[0]=='A':
@@ -107,7 +110,7 @@ def SM(seq):
             if seq[0]=='Q':
                 SM = SM + Q1[1:len(Q1)]
             SM = SM + ')'
-            
+
     for j in seq[2:len(seq)]:
         SM = SM + 'C(=O)NC'
         if j=='G':
@@ -149,6 +152,6 @@ def SM(seq):
         if j=='F':
             SM = SM + '(' + F1[10:len(F1)] + ')'
         if j=='Q':
-            SM = SM + '(' + Q1[10:len(Q1)] + ')'       
+            SM = SM + '(' + Q1[10:len(Q1)] + ')'
     SM = SM +'C(=O)O'
     return SM
