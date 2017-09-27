@@ -12,12 +12,15 @@ def SM2(seq):
     H2 = 'OC(=O)[C@@H](N)CC1[N]=CNC=1'               #H
     K2 = 'OC(=O)[C@@H](N)CCCC(N)'                    #K
     I2 = 'OC(=O)[C@@H](N)[C@H](C)CC'                     #I
-    Y2 = 'OC(=O)[C@@H](N)CC1=CC=C(O)C=C1'            #Y
+    #Y2 = 'OC(=O)[C@@H](N)CC1=CC=C(O)C=C1'            #Y
+    Y2 = 'OC(=O)[C@@H](N)Cc1ccc(O)cc1'
     N2 = 'OC(=O)[C@@H](N)CC(=O)(N)'                  #N
     M2 = 'OC(=O)C(N)CCSC'                       #? Met
     P2 = 'OC(=O)C1CCCN1'                        #P
-    W2 = 'OC(=O)[C@@H](N)C(C1C2C=CC=CC=2N(H)C=1)'    #W
-    F2 = 'OC(=O)[C@@H](N)CC1=CC=CC=C1'               #F
+    #W2 = 'OC(=O)[C@@H](N)C(C1C2C=CC=CC=2N(H)C=1)'    #W
+    W2 = 'OC(=O)[C@@H](N)C(c1c2ccccc2N(H)c1)'
+    #F2 = 'OC(=O)[C@@H](N)CC1=CC=CC=C1'               #F
+    F2 = 'OC(=O)[C@@H](N)Cc1ccccc1'
     Q2 = 'OC(=O)[C@@H](N)CCC(=O)(N)'                 #Q
     SM2 = ''
     list2 = ['G', 'A', 'S', 'R', 'D', 'V', 'T', 'E', 'L', 'C', 'H', 'K', 'I', 'Y', 'N', 'M', 'P', 'W', 'F', 'Q']
@@ -45,14 +48,14 @@ def SM2(seq):
            # if seq[10]=='@':
     ##       if l=='S':
     ##            SM = S2[16:len(S2)]+'C'
-                
+
             if l=='A':
                 SM2 = A2[14:len(A2)]+'[C@H]'
             # if l=='L':
                 # SM2 = L2[15:len(L2)]+'C'
             # if l=='I':
                 # SM2 = I2[15:len(I2)]+'C'
-            
+
 
             if l=='F':
                 SM2 = F2[16:len(F2)]+'C[C@@H]'  #Чтобы был поворот
@@ -63,13 +66,13 @@ def SM2(seq):
             if l=='N':
                 SM2 = N2[16:len(N2)]+'C[C@@H]'
             if l=='Y':
-                SM2 = 'C1=CC(O)=CC=C1' +'C[C@@H]'  #Чтобы был поворот
+                SM2 = 'c1cc(O)ccc1' +'C[C@@H]'  #Чтобы был поворот
             if l=='H':
                 SM2 = H2[16:len(H2)]+'C[C@@H]'   #Чтобы был поворот
             if l=='T':
                 SM2 = 'C[C@H](O)' +'[C@@H]'
             if l=='V':
-                SM2 = V2[15:len(V2)]+'[C@@H]'  
+                SM2 = V2[15:len(V2)]+'[C@@H]'
             if l=='S':
                 SM2 = S2[15:len(S2)]+'[C@@H]'
             if l=='D':
@@ -173,12 +176,12 @@ def SM2(seq):
                 if seq[0]=='F':
                     SM2 = SM2 + F2[1:len(F2)]
                 SM2 = SM2 + ')CCCC1'
-            
+
     for j in seq[2:len(seq)]:
         if j=='P':
             SM2 = SM2 + 'C(=O)N1CCCC1'
         else:
-            SM2 = SM2 + 'C(=O)N'  #а здесь атом С с хиральностью!!! Соответственно, есть разделение         
+            SM2 = SM2 + 'C(=O)N'  #а здесь атом С с хиральностью!!! Соответственно, есть разделение
             if j=='G':
                 SM2 = SM2 + 'C'
             if j=='R':
@@ -197,8 +200,8 @@ def SM2(seq):
         ##        SM2 = SM2 + 'C(' + P2[10:len(P2)] + ')'
             # if j=='F':
                 # SM2 = SM2 + 'C(' + F2[10:len(F2)] + ')'
-               
-                
+
+
             if j=='A':
                 SM2 = SM2 + '[C@H](' + A2[14:len(A2)] + ')'
             # if j=='L':
@@ -208,11 +211,11 @@ def SM2(seq):
 
 
             if l=='F':
-                SM2 = SM2 + '[C@@H](' + F2[15:len(F2)] + ')' 
+                SM2 = SM2 + '[C@@H](' + F2[15:len(F2)] + ')'
             if j=='L':
                 SM2 = SM2 + '[C@@H](' + L2[15:len(L2)] + ')'
             if j=='I':
-                SM2 = SM2 + '[C@@H](' + I2[15:len(I2)] + ')' 
+                SM2 = SM2 + '[C@@H](' + I2[15:len(I2)] + ')'
             if j=='V':
                 SM2 = SM2 + '[C@@H](' + V2[15:len(V2)] + ')'
             if j=='T':
@@ -222,7 +225,7 @@ def SM2(seq):
             if j=='Y':
                 SM2 = SM2 + '[C@@H](' + Y2[15:len(Y2)] + ')'
             if j=='N':
-                SM2 = SM2 + '[C@@H](' + N2[15:len(N2)] + ')'	
+                SM2 = SM2 + '[C@@H](' + N2[15:len(N2)] + ')'
             if j=='S':
                 SM2 = SM2 + '[C@@H](' + S2[15:len(S2)] + ')'
             if j=='D':
@@ -241,6 +244,6 @@ def SM2(seq):
                 SM2 = SM2 + '[C@@H](' + W2[15:len(W2)] + ')'
             if j=='Q':
                 SM2 = SM2 + '[C@@H](' + Q2[15:len(Q2)] + ')'
-                
+
     SM2 = SM2 +'C(=O)O'
     return SM2
